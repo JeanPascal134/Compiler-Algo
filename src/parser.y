@@ -23,6 +23,7 @@ int yylex(void);
 
 %token EQ NEQ LE GE LT GT
 %token AND OR NOT
+%token PLUS MINUS TIMES DIV MOD
 
 %token LPAREN RPAREN
 %token LBRACE RBRACE
@@ -168,3 +169,4 @@ expression:
 void yyerror(const char *s) {
     fprintf(stderr, "Erreur syntaxique : %s\n", s);
 }
+

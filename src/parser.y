@@ -6,7 +6,7 @@
 
 %union {
     int number;
-    
+    bool bl;
     char* identifier;
 }
 
@@ -50,4 +50,5 @@ expression:
 void yyerror(const char *s) {
     fprintf(stderr, "Erreur: %s\n", s);
 }
+
 

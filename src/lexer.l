@@ -25,7 +25,7 @@
 "\\begin{algo}" { return BEGIN_ALGO; } 
 "\\end{algo}"   { return END_ALGO; }
 
-[0-9]+         { return yyval.integer=atoi(yytext);return INTEGER;}
+[0-9]+         { return yyval.integer=atoi(yytext);return INT;}
 [a-zA-Z_] [a-zA-Z0-9_]* { yylval.identifier = strdup(yytext); return IDENTIFIER; }
 
 
@@ -41,16 +41,16 @@
 "/"             { return DIV; }
 "%"             { return MOD; }
 
-"="              { return ASSIGN; }
-"\\("            { return LPAREN; }
-"\\)"            { return RPAREN; }
+
+"("            { return LPAREN; }
+")"            { return RPAREN; }
 "{"              { return LBRACE; }
 "}"              { return RBRACE; }
 ","              { return COMMA; }
 ";"              { return SEMICOLON; }
 
-"true"           { yylval.boolean = 1; return BOOL; }
-"false"          { yylval.boolean = 0; return BOOL; }
+"true"           { yylval.bl = true; return TRUE; }
+"false"          { yylval.bl = false; return FALSE; }
 
 "&&"            { return AND; }
 "||"            { return OR; }
@@ -61,6 +61,7 @@
 
 
 %%
+
 
 
 

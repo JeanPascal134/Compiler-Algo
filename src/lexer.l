@@ -13,20 +13,33 @@
 [ \t\n]+  ; //Ignorer les espaces et les retours à la ligne
 "\\SET"        { return SET; } 
 "\\IF"         { return IF; }
+"\\FI"         { return FI; }
 "\\ELSE"       { return ELSE; }
 "\\DOWHILE"    { return DOWHILE; }
 "\\DOFORI"     { return DOFORI; }
+"\\OD"         { return OD; }
 "\\CALL"       { return CALL; }
 "\\RETURN"     { return RETURN; }
 "\\TO"         { return TO;} 
 
+"\\begin{algo}" { return BEGIN_ALGO; } 
+"\\end{algo}"   { return END_ALGO; }
+
 [0-9]+         { return yyval.integer=atoi(yytext);return INTEGER;}
 [a-zA-Z_] [a-zA-Z0-9_]* { yylval.identifier = strdup(yytext); return IDENTIFIER; }
 
-"+"             { return '+'; }
-"-"             { return '-'; }
-"*"             { return '*'; }
-"/"             { return '/'; }
+
+"=="            { return EQ; }
+"!="            { return NEQ; } 
+"<="            { return LE; }
+">="            { return GE; } 
+"<"             { return LT; } 
+">"             { return GT; }
+"+"             { return PLUS; }
+"-"             { return MINUS; }
+"*"             { return TIMES; }
+"/"             { return DIV; }
+"%"             { return MOD; }
 
 "="              { return ASSIGN; }
 "\\("            { return LPAREN; }
@@ -48,6 +61,7 @@
 
 
 %%
+
 
 
 

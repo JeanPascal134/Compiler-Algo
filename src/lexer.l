@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "y.tab.h"
+#include "parser.tab.h"
 %}
 
 %option noyywrap
@@ -48,6 +48,7 @@
 
 
 %%
+
 
 
 

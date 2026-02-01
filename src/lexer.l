@@ -6,6 +6,8 @@
 #include "y.tab.h"
 %}
 
+%option noyywrap
+
 %%
 // Règles de lexique 
 [ \t\n]+  ; //Ignorer les espaces et les retours à la ligne
@@ -16,8 +18,16 @@
 "\\DOFORI"     { return DOFORI; }
 "\\CALL"       { return CALL; }
 "\\RETURN"     { return RETURN; }
-[0-9]+         { return yyval.number=atoi(yytext);return NUMBER;}
+"\\TO"         { return TO;} 
+
+[0-9]+         { return yyval.integer=atoi(yytext);return INTEGER;}
 [a-zA-Z_] [a-zA-Z0-9_]* { yylval.identifier = strdup(yytext); return IDENTIFIER; }
+
+"+"             { return '+'; }
+"-"             { return '-'; }
+"*"             { return '*'; }
+"/"             { return '/'; }
+
 "="              { return ASSIGN; }
 "\\("            { return LPAREN; }
 "\\)"            { return RPAREN; }
@@ -25,12 +35,20 @@
 "}"              { return RBRACE; }
 ","              { return COMMA; }
 ";"              { return SEMICOLON; }
+
 "true"           { yylval.boolean = 1; return BOOL; }
 "false"          { yylval.boolean = 0; return BOOL; }
-.                { return yytext[0]; } // Retourner tout autre caractère
+
+"&&"            { return AND; }
+"||"            { return OR; }
+"!"             { return NOT; }
+
+.               {fprintf(stderr, "Bad character: %c\n", yytext[0]);
+                 yyterminate();} // Retourner tout autre caractère
 
 
 %%
+
 
 
 

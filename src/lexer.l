@@ -15,16 +15,22 @@
 "\\DOFORI"     { return DOFORI; }
 "\\CALL"       { return CALL; }
 "\\RETURN"     { return RETURN; }
-[0-9]+
-[a-zA-Z_] [a-zA-Z0-9_]* { yylval = strdup(yytext); return IDENTIFIER; }
+[0-9]+         { return yyval.number=atoi(yytext);return NUMBER;}
+[a-zA-Z_] [a-zA-Z0-9_]* { yylval.identifier = strdup(yytext); return IDENTIFIER; }
 "="              { return ASSIGN; }
 "\\("            { return LPAREN; }
 "\\)"            { return RPAREN; }
+"{"              { return LBRACE; }
+"}"              { return RBRACE; }
+","              { return COMMA; }
 ";"              { return SEMICOLON; }
+"true"           { yylval.boolean = 1; return BOOL; }
+"false"          { yylval.boolean = 0; return BOOL; }
 .                { return yytext[0]; } // Retourner tout autre caractère
 
 
 %%
+
 
 
 
